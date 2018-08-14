@@ -2,12 +2,12 @@
 
 
 ## Basic Text Processing 
-(Main source: [Lecture Slides from the Stanford Coursera course](http://spark-public.s3.amazonaws.com/nlp/slides/textprocessingboth.pdf)))
+(Main source: [Lecture slides from the Stanford Coursera course](http://spark-public.s3.amazonaws.com/nlp/slides/textprocessingboth.pdf))
 
 ### Regular Expressions
 * Syntax for processing strings
 * ****`LIBRARY`**** re (built-in)
-* ****`LIBRARY`**** regex (third-party): You can use unicode category expressions such as '\p{Han}' for all Chinese characters.
+* ****`LIBRARY`**** [regex](https://pypi.org/project/regex/) (third-party): You can use unicode category expressions such as '\p{Han}' for all Chinese characters and '\p{Latin}' for the Latin script.
 * ****`ONLINE`**** https://regexr.com/
 * ****`SOFTWARE`**** [PowerGrep](https://www.powergrep.com/)
 
@@ -15,17 +15,18 @@
 
 ### Normalization
 #### Lemmatization
-* Lemma: 
-* Why?
-* E.g., am, are, is -> be
-* E.g., car, cars, car's -> car
-
+* Lemma: the canonical or dictionary form of a set of words
+  * E.g., produce, produced, production -> produce
+* ****`WHY?`**** Word frequency, dictionary lookup
+* ****`HOW?`**** Language knowledge
+* ****`LIBRARY`**** [nltk stemmers](http://www.nltk.org/howto/stem.html)
 
 #### Stemming
-* Stem:
-* E.g., automate(s),    automaGc,    automaGon
-* Why?
-* How?
+* Stem: the part of the word that never changes even when morphologically inflected
+  * E.g., produce, produced, production -> produc-
+* ****`WHY?`**** Query-document match
+* ****`HOW?`**** Rule
+* ****`LIBRARY`**** [nltk wordnet lemmatizer](https://www.nltk.org/api/nltk.stem.html)
 
 #### Unicode Normalization 
 (Main source: [unicode.org](http://unicode.org/reports/tr15/))
@@ -87,20 +88,35 @@
 ### ARPABET
   * Represents phonemes of  American English with ASCII characters.
   * Has been used in speech synthesis.
-  * Used in the CMU Pronouncing Dictionary and the TIMIT dataset.
-  * [Symbols](https://en.wikipedia.org/wiki/ARPABET)
+  * Used in the [CMU Pronouncing Dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict) and the [TIMIT](https://catalog.ldc.upenn.edu/ldc93s1) dataset.
+  * [ARPABET Symbols](https://en.wikipedia.org/wiki/ARPABET)
 
 ### Braille
 ### Emoticons
 
 ## Languages
 ### Arabic
+  * ****`SCRIPT`**** Arabic abjad
+  * ****`CHAR SET`**** [\p{Arabic}.؟!،]
+  * Written from right to left
+  * Cursive
+  * no distinct upper and lower case letter forms
+Both printed and written Arabic are cursive, with most of the letters within a word directly connected to the adjacent letters. 
+ it should be noted that some punctuation marks in Arabic look different from the English counterparts, e.g. the English comma is (,) while the Arabic comma (الفاصلة) points the opposite way (،) and it is written on top of the line. The English question mark is (?) while the Arabic question mark (علامة الاستفهام) looks like this (؟).
 
 ### Bengali
 
 ### Czech
+  * ****`SCRIPT`**** Latin script 
+  * ****`CHAR SET`**** [ AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÁáÉéÍíÓóÚúÝýČčĎďĚěŇňŘřŠšŤťŮůŽž.!?\-0-9]
+
+The full stop is placed after a number if it stands for ordinal numerals (as in German), e.g. 1. den (= první den) – the 1st day. 
 
 ### Dutch
+  * ****`SCRIPT`**** Latin script 
+    * ****`CHAR SET`**** [ A-Za-z.!?'\-0-9]
+  http://www.dutchgrammar.com/en/?n=SpellingAndPronunciation.03
+
 
 ### English
   * ****`SCRIPT`**** Latin script 
@@ -108,17 +124,11 @@
   * Diacrtics can be treated as optional.
      * E.g., naïve = naive, façade = facade, résumé = resume
   * Normalization function example:
-```
-	import unicodedata
-	def strip_diacritics(str):
-		return ''.join(char for char in unicodedata.normalize('NFD', str)
-                   if unicodedata.category(char) != 'Mn')
-```
   * Periods (.) are used at the end of a sentence or for abbreviations.
     * E.g., etc., i.e., e.g.
   * The closing quotation mark (’) and apostrophe (') are often mixed up. (Read [this](https://webdesignledger.com/common-typography-mistakes-apostrophes-versus-quotation-marks/#5d9cd1131b))
   * ****`ORTHOGRAPHY`**** Many words have more than one spelling. (E.g., gray or grey)
-  * Graphemes and phonemes are not directly linked. In other words, it's not always possible to infer the pronunciation of a word from its spelling. Therefore in speech synthesis a preprocessor that converts graphemes to phonemes is often used.
+  * Graphemes and phonemes are not directly linked. In other words, it's not always possible to infer the pronunciation of a word from its spelling. Therefore in speech synthesis a preprocessor that converts graphemes to phonemes is often used. (Check [English g2p](https://github.com/Kyubyong/g2p))
   * Compared to such languages as Chinese, Japanese, or Thai, tokenization is not so important. You can simply divide text into sentences by [.!?] and words by a white space, respectively at the sacrifice of accuray. (Check [nltk tokenize](https://www.nltk.org/_modules/nltk/tokenize.html)) 
 * To identify multi word expressions is not always easy. (See [Multiword Expression Project](http://mwe.stanford.edu/))
    * Idioms e.g., ‘kick the bucket’
@@ -153,7 +163,7 @@
   * No space between words.
   * Both full- and half-width arabic numbers are used.
   * Note that period, comma, question mark, and exclamation mark are different from English ones.
-  * A morph analyzer functions as a tokenizer and a grapheme to phoneme converter. (Check [MeCab])
+  * A morph analyzer functions as a tokenizer and a grapheme to phoneme converter. (Check [MeCab](http://taku910.github.io/mecab/))
 
 ### Javanese
 
@@ -166,7 +176,7 @@
 ### Malay
 * ****`SCRIPT`**** Latin script
 * ****`CHAR SET`**** [ A-Za-z.!?'\-0-9]
-
+* ****`MORPHOLOGY`**** 
 
 ### Mandarin
 
@@ -177,6 +187,9 @@
 ### Punjabi
 
 ### Russian
+* ****`SCRIPT`**** Cyrillic script
+* ****`CHAR SET`**** [ \p{Cyrillic}.!?'\-0-9]
+
 
 ### Spanish
 
