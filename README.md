@@ -133,9 +133,11 @@
   * ****`CHAR SET`**** [\p{Arabic}.؟!،]
   * Written from right to left
   * Cursive
-  * no distinct upper and lower case letter forms
-Both printed and written Arabic are cursive, with most of the letters within a word directly connected to the adjacent letters. 
- it should be noted that some punctuation marks in Arabic look different from the English counterparts, e.g. the English comma is (,) while the Arabic comma (الفاصلة) points the opposite way (،) and it is written on top of the line. The English question mark is (?) while the Arabic question mark (علامة الاستفهام) looks like this (؟).
+  * No distinct upper and lower case letter forms
+  * Comma (،), question mark (؟)
+  * Many dialects with varying orthographies exist.
+  * Clitics are attached to a stem any orthographic marks like an apostrophe. (See [Fahad Alotaiby et al.](http://www.aclweb.org/anthology/Y10-1068))
+* ****`TOOL`**** [Stanford Arabic Segmenter](https://nlp.stanford.edu/software/segmenter.shtml)
 
 ### Bengali
 
