@@ -1,4 +1,4 @@
-# Multi-Language Text Processing
+# Multi-lingual Text Processing
 
 
 ## Basic Text Processing 
@@ -6,12 +6,39 @@
 
 ### Regular Expressions
 * Syntax for processing strings
-* ****`LIBRARY`**** re (built-in)
 * ****`LIBRARY`**** [regex](https://pypi.org/project/regex/) (third-party): You can use unicode category expressions such as '\p{Han}' for all Chinese characters and '\p{Latin}' for the Latin script.
 * ****`ONLINE`**** https://regexr.com/
 * ****`SOFTWARE`**** [PowerGrep](https://www.powergrep.com/)
 
 ### Tokenization
+* Token: character, subword ([bpe](https://en.wikipedia.org/wiki/Byte_pair_encoding)), word, [mwe](https://en.wikipedia.org/wiki/Idiom#Multiword_Expression), sentence, etc.
+* Character
+   * Simple (😄)
+   * Small vocabulary (< 100) (😄)
+   * Robust to rare words (😄)
+   * Long sequence (😭)
+* Subword
+   * Best performance in machine translation (😄)
+   * Robust to rare words (😄)
+   * Not intuitive (😭)
+   * Data-dependent (😭)
+* Word
+   * Usuanlly simple (😄)
+   * Short sequence (😄)
+   * Transfer learning (😄)
+   * Large vocabulary (> 10000) (😭)
+   * Weak in rare words (😭)
+* MWE
+   * Multi-word expression
+   * Idioms e.g., ‘kick the bucket’
+   * Compounds e.g., ‘San Francisco’
+   * Phrasal verbs e.g. ‘get … across’
+   * ****`PROJECT`***** [Multiword Expression Project](http://mwe.stanford.edu/))
+* Sentence
+   * Usually identified by a sentenc ending symbol (.!?)
+   * Periods (.) are sometimes ambiguous.
+     * Abbreviations like Inc. or Dr.
+     * Numbers like .02% or 4.3    
 
 ### Normalization
 #### Lemmatization
@@ -19,25 +46,32 @@
   * E.g., produce, produced, production -> produce
 * ****`WHY?`**** Word frequency, dictionary lookup
 * ****`HOW?`**** Language knowledge
-* ****`LIBRARY`**** [nltk stemmers](http://www.nltk.org/howto/stem.html)
+* ****`LIBRARY`**** [nltk wordnet lemmatizer](https://www.nltk.org/_modules/nltk/stem/wordnet.html)
 
 #### Stemming
 * Stem: the part of the word that never changes even when morphologically inflected
   * E.g., produce, produced, production -> produc-
 * ****`WHY?`**** Query-document match
-* ****`HOW?`**** Rule
-* ****`LIBRARY`**** [nltk wordnet lemmatizer](https://www.nltk.org/api/nltk.stem.html)
+* ****`HOW?`**** Sequence of rules
+* ****`LIBRARY`**** [nltk stemmers](https://www.nltk.org/api/nltk.stem.html)
 
 #### Unicode Normalization 
 (Main source: [unicode.org](http://unicode.org/reports/tr15/))
 
- * Canonical
- * Compatibility
-* NFD
-* NFC
-* NFKC
-* NFKD
-* Strip diacritics
+ * Canonical equivalence: a fundamental equivalency between characters which represent the same abstract character.
+    * E.g., combining sequence: Ç ↔  C+◌̧
+    * E.g., ordering of combining marks: q+◌̇+◌̣ ↔ q+◌̣+◌̇
+ * Compatibility equivalence: a weaker type of equivalence between characters which represent the same abstract character, but which may have distinct visual appearances or behaviors.
+   * E.g., circled variants: ① → 1
+   * E.g., width variants: ｶ → カ
+* NFD: Canonical Decomposition
+* NFKD: Compatibility Decomposition
+* NFC: NFD + Canonical Composition
+* NFKC: NFKD + Canonical Composition
+* Typically NFC is desirable for string matching.
+* NFKC is useful if you don't want to distinguish compatibility-equivalent characters like full- and half-width characters. 
+* See [this example](https://unicode.org/reports/tr15/images/UAX15-NormFig6.jpg)
+* Strip diacritics: to ASCII characters
 ```
 	import unicodedata
 	def strip_diacritics(str):
@@ -53,30 +87,33 @@
   * Latin alphabet (AaBbCc), Cyrillic alphabet (АБВ)
   * There is a fixed order.
   * Consonants and vowels stand alone.
-  * Advantageous for computer processing.
+  * Desirable for computer processing.
 
 ### Abjads (= Consonant alphabets)
   * Each letter stands for a consonant, leaving the reader to supply the vowel.
+  * Figuratively, "Cn y rcgnz ths?"
   * Arabic script, Hebrew script
-  * Hard to learn
+  * Hard to learn (See [this discussion](https://www.quora.com/How-can-I-learn-Arabic-by-myself-if-there-is-no-vowel-sounds-haraka-on-words))
   * Challenging for processing.
 
 ### Abugidas
   * Consonants (Primary) + Vowels (Secondary)
-  * Devanagari
+  * Devanagari, Tamil
+  * See [Devanagari compounds](https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Devanagari_matras.png/1500px-Devanagari_matras.png)
 
 ### Syllabaries
   * Corresponds to a syllable that is not further decomposed.
   * Hiragana, Katakana
-  * For computer processing you may need to convert each syllable into a consonant and a vowel.
-    * E.g., か -> ka
+  * Phonemic transcription is often needed.
+    * E.g., かわいい -> kawaii
 
 ### Logographs
-  * Not phonetic
   * Each letter represents an abstract concept.
   * Chinese characters
-  * Tons of letters
+  * Many letters
   * Challenging for processing
+  * Phonemic transcription is often needed.
+    * E.g., 我爱你 -> wǒ ài nǐ
 
 ### IPA (International Phonetic Alphabet)
 * Universal alphabet
@@ -91,12 +128,8 @@
   * Used in the [CMU Pronouncing Dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict) and the [TIMIT](https://catalog.ldc.upenn.edu/ldc93s1) dataset.
   * [ARPABET Symbols](https://en.wikipedia.org/wiki/ARPABET)
 
-### Braille
-### Emoticons
-
 ## Languages
 ### Arabic
-  * ****`SCRIPT`**** Arabic abjad
   * ****`CHAR SET`**** [\p{Arabic}.؟!،]
   * Written from right to left
   * Cursive
@@ -107,13 +140,11 @@ Both printed and written Arabic are cursive, with most of the letters within a w
 ### Bengali
 
 ### Czech
-  * ****`SCRIPT`**** Latin script 
-  * ****`CHAR SET`**** [ AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÁáÉéÍíÓóÚúÝýČčĎďĚěŇňŘřŠšŤťŮůŽž.!?\-0-9]
+  * ****`CHAR SET`**** [ A-Za-zÁáÉéÍíÓóÚúÝýČčĎďĚěŇňŘřŠšŤťŮůŽž.!?\-0-9]
 
 The full stop is placed after a number if it stands for ordinal numerals (as in German), e.g. 1. den (= první den) – the 1st day. 
 
 ### Dutch
-  * ****`SCRIPT`**** Latin script 
     * ****`CHAR SET`**** [ A-Za-z.!?'\-0-9]
   http://www.dutchgrammar.com/en/?n=SpellingAndPronunciation.03
 
@@ -130,10 +161,7 @@ The full stop is placed after a number if it stands for ordinal numerals (as in 
   * ****`ORTHOGRAPHY`**** Many words have more than one spelling. (E.g., gray or grey)
   * Graphemes and phonemes are not directly linked. In other words, it's not always possible to infer the pronunciation of a word from its spelling. Therefore in speech synthesis a preprocessor that converts graphemes to phonemes is often used. (Check [English g2p](https://github.com/Kyubyong/g2p))
   * Compared to such languages as Chinese, Japanese, or Thai, tokenization is not so important. You can simply divide text into sentences by [.!?] and words by a white space, respectively at the sacrifice of accuray. (Check [nltk tokenize](https://www.nltk.org/_modules/nltk/tokenize.html)) 
-* To identify multi word expressions is not always easy. (See [Multiword Expression Project](http://mwe.stanford.edu/))
-   * Idioms e.g., ‘kick the bucket’
-   * Compounds e.g., ‘San Francisco’
-   * Phrasal verbs e.g. ‘get … across’
+* To identify multi word expressions is not always easy. 
 
 ### French
   * ****`SCRIPT`**** Latin script
@@ -182,7 +210,7 @@ The full stop is placed after a number if it stands for ordinal numerals (as in 
 
 
 ### Persian
-### Polish
+
 ### Portuguese
 ### Punjabi
 
@@ -193,9 +221,6 @@ The full stop is placed after a number if it stands for ordinal numerals (as in 
 
 ### Spanish
 
-### Swedish
-
-### Tagalog
 ### Tamil
 ### Telugu
 
