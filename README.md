@@ -85,27 +85,37 @@ def strip_diacritics(str):
 
 ### Alphabets
   * Corresponds to one or more phonemes.
-  * Latin alphabet (AaBbCc), Cyrillic alphabet (АБВ)
+  * Latin alphabet (AaBbCc), Cyrillic alphabet (кириллица), Hangul (한글)
+  * Hangul
+
+  <img src="img/hangeul.svg.png" width=300 />
+
   * There is a fixed order.
   * Consonants and vowels stand alone.
   * Desirable for computer processing.
 
 ### Abjads (= Consonant alphabets)
   * Each letter stands for a consonant, leaving the reader to supply the vowel.
-  * Figuratively, "Cn y rcgnz ths?"
-  * Arabic script, Hebrew script
+  * "Cn y ndrstnd ths?"
+  * Arabic script (عربى), Hebrew script (עִברִית)
+  * 'book' in Arabic (= 'kitaab')
+
+  <img src="img/arabic.png" >
+  
   * Hard to learn (See [this discussion](https://www.quora.com/How-can-I-learn-Arabic-by-myself-if-there-is-no-vowel-sounds-haraka-on-words))
   * Challenging for processing.
 
 ### Abugidas
   * Consonants (Primary) + Vowels (Secondary)
-  * Devanagari, Tamil
-  * See [Devanagari compounds](https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Devanagari_matras.png/1500px-Devanagari_matras.png)
+  * Devanagari (देवनागरी), Tamil (தமிழ்)
+  * Devanagari compounds
+
+  <img src="img/devanagari.png" />
 
 ### Syllabaries
   * Corresponds to a syllable that is not further decomposed.
-  * Hiragana, Katakana
-  * Phonemic transcription is often needed.
+  * Hiragana (ひらがな), Katakana (カタカナ)
+  * Phonemic transcription is useful.
     * E.g., かわいい -> kawaii
 
 ### Logographs
@@ -113,7 +123,7 @@ def strip_diacritics(str):
   * Chinese characters
   * Many letters
   * Challenging for processing
-  * Phonemic transcription is often needed.
+  * Phonemic transcription is useful.
     * E.g., 我爱你 -> wǒ ài nǐ
 
 ### IPA (International Phonetic Alphabet)
