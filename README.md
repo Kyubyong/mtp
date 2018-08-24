@@ -207,10 +207,10 @@ def strip_diacritics(str):
 ### Javanese
 
 ### Korean
-* ****`CHAR SET`**** [ \p{Hangul}A-Za-z.!?'0-9]
-* Hangul is an alphabet, but consonants and vowels, which called 'jamo' in Korean, combine to form a syllable, which has an independent code point.
-   * E.g., ㅎ (314E)+ㅏ (314F) +ㄴ(3134) ->한 (D55C)
- *  Jamo has two types: Hangul compatibility  Jamo and Hangul Jamo.
+  * ****`CHAR SET`**** [ \p{Hangul}A-Za-z.!?'0-9]
+  * Hangul is an alphabet, but consonants and vowels, which called 'jamo' in Korean, combine to form a syllable, which has an independent code point.
+    * E.g., ㅎ (314E)+ㅏ (314F) +ㄴ(3134) ->한 (D55C)
+  *  Jamo has two types: Hangul compatibility  Jamo and Hangul Jamo.
     * Hangul Compatibility  Jamo (U+3130-U+318F)
       * Composes a syllable
       * In computer keyboards
@@ -221,10 +221,10 @@ def strip_diacritics(str):
       * If you need to decompose Hangul syllables, Hangul Jamo is better than Hangul Compatibility Jamo. (Check [this](https://github.com/Kyubyong/kss))
   * Orthography is notoriously difficult. For that reason you can't expect any unofficial writing will obey the rules.
   * Grammar checker is hard to make. (But surprisingly there is a decent one. Check [this](http://164.125.7.61/speller/) )
-* Like German, many compounds are created by merging two words without a space.
+  * Like German, many compounds are created by merging two words without a space.
     * E.g., 점심시간 "lunch time" (= 점심 "lunch" + 시간 "time")
-* Hangul is phonetic, but the current orthography policy respects the origin of words rather than reflecting sound itself. As a result, sometimes the real pronunciation of some words is different from its grapheme.
-  * E.g., 독립 dok rip (spelling) -> /dong nip/ (pronunciation) "independence"
+  * Hangul is phonetic, but the current orthography policy respects the origin of words rather than reflecting sound itself. As a result, sometimes the real pronunciation of some words is different from its grapheme.
+   * E.g., 독립 dok rip (spelling) -> /dong nip/ (pronunciation) "independence"
 
 * ****`TOOL`**** [Python-jamo: Hangul syllable decomposition and synthesis library](https://github.com/jdongian/python-jamo)
 * ****`TOOL`**** [KoG2P](https://github.com/scarletcho/KoG2P)
