@@ -1,6 +1,5 @@
 # Multi-lingual Text Processing
 
-
 ## Basic Text Processing 
 (Main source: [Lecture slides from the Stanford Coursera course](http://spark-public.s3.amazonaws.com/nlp/slides/textprocessingboth.pdf))
 
@@ -11,7 +10,7 @@
 * ****`SOFTWARE`**** [PowerGrep](https://www.powergrep.com/)
 
 ### Tokenization
-* Token: character, subword ([bpe](https://en.wikipedia.org/wiki/Byte_pair_encoding)), word, [mwe](https://en.wikipedia.org/wiki/Idiom#Multiword_Expression), sentence, etc.
+* Token: a unit like character, subword ([bpe](https://en.wikipedia.org/wiki/Byte_pair_encoding)), word, [mwe](https://en.wikipedia.org/wiki/Idiom#Multiword_Expression), sentence, etc.
 * Character
    * Simple (😄)
    * Small vocabulary (< 100) (😄)
@@ -23,20 +22,19 @@
    * Not intuitive (😭)
    * Data-dependent (😭)
 * Word
-   * Usuanlly simple (😄)
+   * Usually simple (😄)
    * Short sequence (😄)
    * Transfer learning (😄)
    * Large vocabulary (> 10000) (😭)
    * Weak in rare words (😭)
-* MWE
-   * Multi-word expression
+* MWE (Multi-word expression)
    * Idioms e.g., ‘kick the bucket’
    * Compounds e.g., ‘San Francisco’
    * Phrasal verbs e.g. ‘get … across’
    * ****`PROJECT`***** [Multiword Expression Project](http://mwe.stanford.edu/))
 * Sentence
    * Usually identified by a sentenc ending symbol (.!?)
-   * Periods (.) are sometimes ambiguous.
+   * Period (.) is sometimes ambiguous.
      * Abbreviations like Inc. or Dr.
      * Numbers like .02% or 4.3    
 
@@ -44,8 +42,8 @@
 #### Lemmatization
 * Lemma: the canonical or dictionary form of a set of words
   * E.g., produce, produced, production -> produce
-* ****`WHY?`**** Word frequency, dictionary lookup
-* ****`HOW?`**** Language knowledge
+* ****`WHY?`**** Dictionary lookup
+* ****`HOW?`**** Linguistic knowledge
 * ****`LIBRARY`**** [nltk wordnet lemmatizer](https://www.nltk.org/_modules/nltk/stem/wordnet.html)
 
 #### Stemming
@@ -58,16 +56,19 @@
 #### Unicode Normalization 
 (Main source: [unicode.org](http://unicode.org/reports/tr15/))
 
- * Canonical equivalence: a fundamental equivalency between characters which represent the same abstract character.
+ * Canonical equivalence: a fundamental equivalency between characters which represent the same abstract character
     * E.g., combining sequence: Ç ↔  C+◌̧
     * E.g., ordering of combining marks: q+◌̇+◌̣ ↔ q+◌̣+◌̇
- * Compatibility equivalence: a weaker type of equivalence between characters which represent the same abstract character, but which may have distinct visual appearances or behaviors.
+ * Compatibility equivalence: a weaker type of equivalence between characters which represent the same abstract character, but which may have distinct visual appearances or behaviors
    * E.g., circled variants: ① → 1
    * E.g., width variants: ｶ → カ
 * NFD: Canonical Decomposition
-* NFKD: Compatibility Decomposition
+* NF****K****D: Compatibility Decomposition
 * NFC: NFD + Canonical Composition
-* NFKC: NFKD + Canonical Composition
+* NF****K****C: NFKD + Canonical Composition
+* Examples
+
+<img src="img/composites.png" />
 * Typically NFC is desirable for string matching.
 * NFKC is useful if you don't want to distinguish compatibility-equivalent characters like full- and half-width characters. 
 * See [this example](https://unicode.org/reports/tr15/images/UAX15-NormFig6.jpg)
