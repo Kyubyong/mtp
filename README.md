@@ -69,14 +69,14 @@
 * Examples
 
 <img src="img/composites.png" />
+
 * Typically NFC is desirable for string matching.
 * NFKC is useful if you don't want to distinguish compatibility-equivalent characters like full- and half-width characters. 
-* See [this example](https://unicode.org/reports/tr15/images/UAX15-NormFig6.jpg)
 * Strip diacritics: to ASCII characters
 ```
-	import unicodedata
-	def strip_diacritics(str):
-		return ''.join(char for char in unicodedata.normalize('NFD', str)
+import unicodedata
+def strip_diacritics(str):
+	return ''.join(char for char in unicodedata.normalize('NFD', str)
                    if unicodedata.category(char) != 'Mn')
 ```
 
