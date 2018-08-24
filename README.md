@@ -101,9 +101,9 @@ def strip_diacritics(str):
   * 'book' in Arabic (= 'kitaab')
 
   <img src="img/arabic.png" >
-  
+
   * Hard to learn (See [this discussion](https://www.quora.com/How-can-I-learn-Arabic-by-myself-if-there-is-no-vowel-sounds-haraka-on-words))
-  * Challenging for processing.
+  * Challenging for processing
 
 ### Abugidas
   * Consonants (Primary) + Vowels (Secondary)
@@ -115,15 +115,15 @@ def strip_diacritics(str):
 ### Syllabaries
   * Corresponds to a syllable that is not further decomposed.
   * Hiragana (ひらがな), Katakana (カタカナ)
-  * Phonemic transcription is useful.
-    * E.g., かわいい -> kawaii
+  * Phonemic transcription is often useful.
+    * E.g., かわいい -> ka wa i i
 
 ### Logographs
   * Each letter represents an abstract concept.
   * Chinese characters
   * Many letters
   * Challenging for processing
-  * Phonemic transcription is useful.
+  * Phonemic transcription is often useful.
     * E.g., 我爱你 -> wǒ ài nǐ
 
 ### IPA (International Phonetic Alphabet)
@@ -145,77 +145,91 @@ def strip_diacritics(str):
   * Written from right to left
   * Cursive
   * No distinct upper and lower case letter forms
-  * Comma (،), question mark (؟)
+  * Comma (،), and question mark (؟) are different from those of English.
   * Many dialects with varying orthographies exist.
   * Clitics are attached to a stem any orthographic marks like an apostrophe. (See [Fahad Alotaiby et al.](http://www.aclweb.org/anthology/Y10-1068))
+      * مستواك "your level" -> ك "your" + مستوى "level"
 * ****`TOOL`**** [Stanford Arabic Segmenter](https://nlp.stanford.edu/software/segmenter.shtml)
 
-### Bengali
-
-### Czech
-  * ****`CHAR SET`**** [ A-Za-zÁáÉéÍíÓóÚúÝýČčĎďĚěŇňŘřŠšŤťŮůŽž.!?\-0-9]
-
-The full stop is placed after a number if it stands for ordinal numerals (as in German), e.g. 1. den (= první den) – the 1st day. 
-
 ### Dutch
-    * ****`CHAR SET`**** [ A-Za-z.!?'\-0-9]
-  http://www.dutchgrammar.com/en/?n=SpellingAndPronunciation.03
-
+* ****`CHAR SET`**** [ A-Za-z.!?'\-0-9]
+    * Digraph 'ij' is considered the same as 'y'. (See [this](http://www.dutchgrammar.com/en/?n=SpellingAndPronunciation.03))
 
 ### English
-  * ****`SCRIPT`**** Latin script 
   * ****`CHAR SET`**** [ A-Za-z.!?'\-0-9]
-  * Diacrtics can be treated as optional.
+  * Diacrtics are optional.
      * E.g., naïve = naive, façade = facade, résumé = resume
-  * Normalization function example:
-  * Periods (.) are used at the end of a sentence or for abbreviations.
+  * Period (.) is used at the end of a sentence or for abbreviations.
     * E.g., etc., i.e., e.g.
+  * Most hyphens in compounds can be replaced with space.
+      * E.g., state-of-the-art = state of the art
+  * Apostrophe (') can construct clitics.
+      * E.g. I'm (=I am), we've (=we have)
   * The closing quotation mark (’) and apostrophe (') are often mixed up. (Read [this](https://webdesignledger.com/common-typography-mistakes-apostrophes-versus-quotation-marks/#5d9cd1131b))
-  * ****`ORTHOGRAPHY`**** Many words have more than one spelling. (E.g., gray or grey)
+  * Many words have more than one spelling. (E.g., gray / grey)
   * Graphemes and phonemes are not directly linked. In other words, it's not always possible to infer the pronunciation of a word from its spelling. Therefore in speech synthesis a preprocessor that converts graphemes to phonemes is often used. (Check [English g2p](https://github.com/Kyubyong/g2p))
-  * Compared to such languages as Chinese, Japanese, or Thai, tokenization is not so important. You can simply divide text into sentences by [.!?] and words by a white space, respectively at the sacrifice of accuray. (Check [nltk tokenize](https://www.nltk.org/_modules/nltk/tokenize.html)) 
+  * Compared to such languages as Chinese, Japanese, or Thai, tokenization is not so important. You can simply divide text into sentences by [.!?] and words by a white space, respectively at the sacrifice of accuracy. (Check [nltk tokenize](https://www.nltk.org/_modules/nltk/tokenize.html)) 
 * To identify multi word expressions is not always easy. 
 
 ### French
-  * ****`SCRIPT`**** Latin script
   * ****`CHAR SET`**** [ A-Za-zçÉéÀàÈèÙùÂâÊêÎîÔôÛûœæ.!?'\-0-9]
-  * ****`ORTHOGRAPHY`**** Diacritics on captial letters are often ignored.
+  * Diacritics on captial letters are often ignored.
   * Mostly two ligatures 'œ' and 'æ' are the same as 'oe' and 'ae', respectively. 
-  * hyphen
+  * Hyphen (-) is used before a pronoun in imperative sentences.
+      * Donne-les-moi ! "Give them to me!""
+  * Clitics with a apostrophe (')
+      * E.g., je ****t'****aime "I love you"
 
 ### German
-  * ****`SCRIPT`**** Latin script
   * ****`CHAR SET`**** [ A-Za-zÄäÖöÜüẞß.!?'\-0-9]
-  * ****`ORTHOGRAPHY`**** Nouns are written in capital letters.
-  * ****`ORTHOGRAPHY`**** No space for compound nouns.
-    * E.g., Rinderwahnsinn ("mad cow syndrome").
-  * ****`ORTHOGRAPHY`**** 'ß' and 'ss' are interchangeable.
+  * Nouns are written in capital letters.
+  * No space for compound nouns (Check [compound splitter](https://github.com/TimKam/compound-word-splitter))
+     * E.g., Rinderwahnsinn "mad cow syndrome"
+  * 'ß' and 'ss' are interchangeable.
 
 ### Greek
 
 ### Hindi
-
+  * Indian numbering system is special.
+    * E.g., 1,00,00,00,000
+  
 ### Hungarian
 
 ### Italian
 ### Japanese
-  * ****`SCRIPT`**** Hiragana, Katakana, Chinese characters
   * ****`CHAR SET`**** [\p{Hiragana}\p{Katakana}\p{Han}A-Za-z0-9０-９。、？！]
-  * No space between words.
+  * No space between words
   * Both full- and half-width arabic numbers are used.
   * Note that period, comma, question mark, and exclamation mark are different from English ones.
   * A morph analyzer functions as a tokenizer and a grapheme to phoneme converter. (Check [MeCab](http://taku910.github.io/mecab/))
+  * When は /ha/ is used as a topic marker it is pronounced as /wa/.
 
 ### Javanese
 
-### Khmer
-* ****`SCRIPT`**** Khmer abugida
-   * No space between words.
-
 ### Korean
+* ****`CHAR SET`**** [ \p{Hangul}A-Za-z.!?'0-9]
+* Hangul is an alphabet, but consonants and vowels, which called 'jamo' in Korean, combine to form a syllable, which has an independent code point.
+   * E.g., ㅎ (314E)+ㅏ (314F) +ㄴ(3134) ->한 (D55C)
+ *  Jamo has two types: Hangul compatibility  Jamo and Hangul Jamo.
+    * Hangul Compatibility  Jamo (U+3130-U+318F)
+      * Composes a syllable
+      * In computer keyboards
+      * The consonants in the onset and the coda are identical.
+    * Hangul Jamo (U+1100-U+11FF)
+      * Used mostly when representing old Hangul
+      * The consonants in the onset and the coda are NOT identical.
+      * If you need to decompose Hangul syllables, Hangul Jamo is better than Hangul Compatibility Jamo. (Check [this](https://github.com/Kyubyong/kss))
+  * Orthography is notoriously difficult. For that reason you can't expect any unofficial writing will obey the rules.
+  * Grammar checker is hard to make. (But surprisingly there is a decent one. Check [this](http://164.125.7.61/speller/) )
+* Like German, many compounds are created by merging two words without a space.
+    * E.g., 점심시간 "lunch time" (= 점심 "lunch" + 시간 "time")
+* Hangul is phonetic, but the current orthography policy respects the origin of words rather than reflecting sound itself. As a result, sometimes the real pronunciation of some words is different from its grapheme.
+  * E.g., 독립 dok rip (spelling) -> /dong nip/ (pronunciation) "independence"
+
+* ****`TOOL`**** [Python-jamo: Hangul syllable decomposition and synthesis library](https://github.com/jdongian/python-jamo)
+* ****`TOOL`**** [KoG2P](https://github.com/scarletcho/KoG2P)
 
 ### Malay
-* ****`SCRIPT`**** Latin script
 * ****`CHAR SET`**** [ A-Za-z.!?'\-0-9]
 * ****`MORPHOLOGY`**** 
 
@@ -228,20 +242,26 @@ The full stop is placed after a number if it stands for ordinal numerals (as in 
 ### Punjabi
 
 ### Russian
-* ****`SCRIPT`**** Cyrillic script
 * ****`CHAR SET`**** [ \p{Cyrillic}.!?'\-0-9]
 
 
 ### Spanish
 
-### Tamil
-### Telugu
-
 ### Thai
 
 ### Turkish
-### Urdu
 
 ### Vietnamese
+* ****`CHAR SET`**** [ \p{Latin}.!?'\-0-9]
+* 6 different tones are marked by diacritics.
+  * a (mid level)
+  * à (low falling)
+  * ả (mid falling)
+  * ã (glottalized rising)
+  * á (high rising)
+  * ạ (glottalized falling)
+* Spaces are used to separate syllables, not words.
+  * E.g., thuế thu nhập cá nhâ -> thuế "tax" + thu_nhập "income" + cá_nhân "individual"
+* ****`INFO`**** [word segmentation tools](https://github.com/magizbox/underthesea/wiki/Vietnamese-NLP-Tools#word-segmentation)
 
 ### Zulu
