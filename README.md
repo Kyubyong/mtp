@@ -1,78 +1,87 @@
 # Multi-lingual Text Processing
 
+## Why ~~Multi-lingual Text~~ Processing?
+  Yes! Modeling is fancy. Data processing is tedious. You don't want to do that. I know. But from my experience it's often data processing that determines the performance of your experiement rather than modeling. If you can't avoid, it's better do it right.
+
+## Why ~~Multi-lingual~~ Text ~~Processing~~?
+You can obtain many techniques of image processing through many routes. More importantly, I'm not an expert in it. Let me focus on text, which is one of the two most typical modalities along with sound when handling language .
+
+## Why Multi-lingual ~~Text Processing~~?
+If you're interested in a single language, say, English, it's fine. But if you touch a language you're not familiar with for some reason, you may need some knowledge on it.
+
 ## Basic Text Processing 
 (Main source: [Lecture slides from the Stanford Coursera course](http://spark-public.s3.amazonaws.com/nlp/slides/textprocessingboth.pdf))
 
 ### Regular Expressions
-* Syntax for processing strings
-* ****`LIBRARY`**** [regex](https://pypi.org/project/regex/) (third-party): You can use unicode category expressions such as '\p{Han}' for all Chinese characters and '\p{Latin}' for the Latin script.
-* ****`ONLINE`**** https://regexr.com/
-* ****`SOFTWARE`**** [PowerGrep](https://www.powergrep.com/)
+  * Syntax for processing strings
+  * ****`LIBRARY`**** [regex](https://pypi.org/project/regex/) (third-party): You can use unicode category expressions such as '\p{Han}' for all Chinese characters and '\p{Latin}' for the Latin script.
+  * ****`ONLINE`**** https://regexr.com/
+  * ****`SOFTWARE`**** [PowerGrep](https://www.powergrep.com/)
 
 ### Tokenization
-* Token: a unit like character, subword ([bpe](https://en.wikipedia.org/wiki/Byte_pair_encoding)), word, [mwe](https://en.wikipedia.org/wiki/Idiom#Multiword_Expression), sentence, etc.
-* Character
-   * Simple (😄)
-   * Small vocabulary (< 100) (😄)
-   * Robust to rare words (😄)
-   * Long sequence (😭)
-* Subword
-   * Best performance in machine translation (😄)
-   * Robust to rare words (😄)
-   * Not intuitive (😭)
-   * Data-dependent (😭)
-* Word
-   * Usually simple (😄)
-   * Short sequence (😄)
-   * Transfer learning (😄)
-   * Large vocabulary (> 10000) (😭)
-   * Weak in rare words (😭)
-* MWE (Multi-word expression)
-   * Idioms e.g., ‘kick the bucket’
-   * Compounds e.g., ‘San Francisco’
-   * Phrasal verbs e.g. ‘get … across’
-   * ****`PROJECT`***** [Multiword Expression Project](http://mwe.stanford.edu/))
-* Sentence
-   * Usually identified by a sentenc ending symbol (.!?)
-   * Period (.) is sometimes ambiguous.
-     * Abbreviations like Inc. or Dr.
-     * Numbers like .02% or 4.3    
+  * Token: a unit like character, subword ([bpe](https://en.wikipedia.org/wiki/Byte_pair_encoding)), word, [mwe](https://en.wikipedia.org/wiki/Idiom#Multiword_Expression), sentence, etc.
+  * Character
+    * Simple (😄)
+    * Small vocabulary (< 100) (😄)
+    * Robust to rare words (😄)
+    * Long sequence (😭)
+  * Subword
+    * Best performance in machine translation (😄)
+    * Robust to rare words (😄)
+    * Not intuitive (😭)
+    * Data-dependent (😭)
+  * Word
+    * Usually simple (😄)
+    * Short sequence (😄)
+    * Transfer learning (😄)
+    * Large vocabulary (> 10000) (😭)
+    * Weak in rare words (😭)
+  * MWE (Multi-word expression)
+    * Idioms e.g., ‘kick the bucket’
+    * Compounds e.g., ‘San Francisco’
+    * Phrasal verbs e.g. ‘get … across’
+    * ****`PROJECT`***** [Multiword Expression Project](http://mwe.stanford.edu/))
+  * Sentence
+    * Usually identified by a sentenc ending symbol (.!?)
+    * Period (.) is sometimes ambiguous.
+    * Abbreviations like Inc. or Dr.
+    * Numbers like .02% or 4.3    
 
 ### Normalization
 #### Lemmatization
-* Lemma: the canonical or dictionary form of a set of words
-  * E.g., produce, produced, production -> produce
-* ****`WHY?`**** Dictionary lookup
-* ****`HOW?`**** Linguistic knowledge
-* ****`LIBRARY`**** [nltk wordnet lemmatizer](https://www.nltk.org/_modules/nltk/stem/wordnet.html)
+  * Lemma: the canonical or dictionary form of a set of words
+    * E.g., produce, produced, production -> produce
+  * ****`WHY?`**** Dictionary lookup
+  * ****`HOW?`**** Linguistic knowledge
+  * ****`LIBRARY`**** [nltk wordnet lemmatizer](https://www.nltk.org/_modules/nltk/stem/wordnet.html)
 
 #### Stemming
-* Stem: the part of the word that never changes even when morphologically inflected
-  * E.g., produce, produced, production -> produc-
-* ****`WHY?`**** Query-document match
-* ****`HOW?`**** Sequence of rules
-* ****`LIBRARY`**** [nltk stemmers](https://www.nltk.org/api/nltk.stem.html)
+  * Stem: the part of the word that never changes even when morphologically inflected
+    * E.g., produce, produced, production -> produc-
+  * ****`WHY?`**** Query-document match
+  * ****`HOW?`**** Sequence of rules
+  * ****`LIBRARY`**** [nltk stemmers](https://www.nltk.org/api/nltk.stem.html)
 
 #### Unicode Normalization 
 (Main source: [unicode.org](http://unicode.org/reports/tr15/))
 
- * Canonical equivalence: a fundamental equivalency between characters which represent the same abstract character
+  * Canonical equivalence: a fundamental equivalency between characters which represent the same abstract character
     * E.g., combining sequence: Ç ↔  C+◌̧
     * E.g., ordering of combining marks: q+◌̇+◌̣ ↔ q+◌̣+◌̇
- * Compatibility equivalence: a weaker type of equivalence between characters which represent the same abstract character, but which may have distinct visual appearances or behaviors
-   * E.g., circled variants: ① → 1
-   * E.g., width variants: ｶ → カ
-* NFD: Canonical Decomposition
-* NF****K****D: Compatibility Decomposition
-* NFC: NFD + Canonical Composition
-* NF****K****C: NFKD + Canonical Composition
-* Examples
+  * Compatibility equivalence: a weaker type of equivalence between characters which represent the same abstract character, but which may have distinct visual appearances or behaviors
+    * E.g., circled variants: ① → 1
+    * E.g., width variants: ｶ → カ
+  * NFD: Canonical Decomposition
+  * NF****K****D: Compatibility Decomposition
+  * NFC: NFD + Canonical Composition
+  * NF****K****C: NFKD + Canonical Composition
+  * Examples
 
 <img src="img/composites.png" />
 
-* Typically NFC is desirable for string matching.
-* NFKC is useful if you don't want to distinguish compatibility-equivalent characters like full- and half-width characters. 
-* Strip diacritics: to ASCII characters
+  * Typically NFC is desirable for string matching.
+  * NFKC is useful if you don't want to distinguish compatibility-equivalent characters like full- and half-width characters. 
+  * Strip diacritics: to ASCII characters
 ```
 import unicodedata
 def strip_diacritics(str):
@@ -141,7 +150,7 @@ def strip_diacritics(str):
 
 ## Languages
 ### Arabic
-  * ****`CHAR SET`**** [\p{Arabic}.؟!،]
+  * ****`CHAR SET`**** [\p{Arabic}.؟!،0-9]
   * Written from right to left
   * Cursive
   * No distinct upper and lower case letter forms
@@ -149,7 +158,7 @@ def strip_diacritics(str):
   * Many dialects with varying orthographies exist.
   * Clitics are attached to a stem any orthographic marks like an apostrophe. (See [Fahad Alotaiby et al.](http://www.aclweb.org/anthology/Y10-1068))
       * مستواك "your level" -> ك "your" + مستوى "level"
-* ****`TOOL`**** [Stanford Arabic Segmenter](https://nlp.stanford.edu/software/segmenter.shtml)
+  * ****`TOOL`**** [Stanford Arabic Segmenter](https://nlp.stanford.edu/software/segmenter.shtml)
 
 ### Dutch
 * ****`CHAR SET`**** [ A-Za-z.!?'\-0-9]
@@ -161,7 +170,7 @@ def strip_diacritics(str):
      * E.g., naïve = naive, façade = facade, résumé = resume
   * Period (.) is used at the end of a sentence or for abbreviations.
     * E.g., etc., i.e., e.g.
-  * Most hyphens in compounds can be replaced with space.
+  * Most hyphens in compounds can be replaced with a space.
       * E.g., state-of-the-art = state of the art
   * Apostrophe (') can construct clitics.
       * E.g. I'm (=I am), we've (=we have)
@@ -178,7 +187,7 @@ def strip_diacritics(str):
   * Hyphen (-) is used before a pronoun in imperative sentences.
       * Donne-les-moi ! "Give them to me!""
   * Clitics with a apostrophe (')
-      * E.g., je ****t'****aime "I love you"
+      * E.g., je <bold>t'</bold>aime "I love you"
 
 ### German
   * ****`CHAR SET`**** [ A-Za-zÄäÖöÜüẞß.!?'\-0-9]
@@ -188,23 +197,25 @@ def strip_diacritics(str):
   * 'ß' and 'ss' are interchangeable.
 
 ### Greek
+  * ****`CHAR SET`**** [ \p{Greek}.!;'\-0-9]
+  * β (beta), θ (theta), and χ (chi) are used as phonetic symbols in the IPA.
+  * The letter sigma 'Σ' has two different lowercase forms, 'σ' and 'ς'. 'ς' is used in word-final position and 'σ' elsewhere. (Read [this](https://www.quora.com/Why-does-the-lowercase-sigma-have-different-forms-at-the-beginning-or-middle-of-a-word-%CF%83-and-at-the-end-%CF%82))
+  * Semicolon (;) is used as a question mark.
 
 ### Hindi
+  * ****`CHAR SET`**** [\p{Devanagari}0-9\|?!]
+  * Vertical line (|) is used at the end of a sentence.
   * Indian numbering system is special.
     * E.g., 1,00,00,00,000
-  
-### Hungarian
 
-### Italian
 ### Japanese
   * ****`CHAR SET`**** [\p{Hiragana}\p{Katakana}\p{Han}A-Za-z0-9０-９。、？！]
   * No space between words
   * Both full- and half-width arabic numbers are used.
   * Note that period, comma, question mark, and exclamation mark are different from English ones.
+  * Often people depend on Romanization to input Japanese in the digital setting. Romanization to Japanese conversion is very important. (Check [this]( https://github.com/Kyubyong/neural_japanese_transliterator))
   * A morph analyzer functions as a tokenizer and a grapheme to phoneme converter. (Check [MeCab](http://taku910.github.io/mecab/))
   * When は /ha/ is used as a topic marker it is pronounced as /wa/.
-
-### Javanese
 
 ### Korean
   * ****`CHAR SET`**** [ \p{Hangul}A-Za-z.!?0-9]
@@ -228,39 +239,57 @@ def strip_diacritics(str):
   * ****`TOOL`**** [Python-jamo: Hangul syllable decomposition and synthesis library](https://github.com/jdongian/python-jamo)
   * ****`TOOL`**** [KoG2P](https://github.com/scarletcho/KoG2P)
 
-### Malay
-* ****`CHAR SET`**** [ A-Za-z.!?'\-0-9]
-* ****`MORPHOLOGY`**** 
-
 ### Mandarin
-
+  * ****`CHAR SET`**** [\p{Han}。、，！？0-9]
+  * There are two types of commas:  ， and 、. Ideographic comma (、) is used when enumerating items in a list.(e.g. 红色、白色、黄色 "red, white, and yellow").
+  * No space between words
+  * Pinyin, the standard Romanization system for Mandarin, is used.
+  * 5 different tones are marked by diacritics in pinyin.
+    * mā (high level)
+    * má (rising)
+    * mǎ (falling and rising)
+    * mà (falling)
+    * ma (neutral)
+  * There are two types of characters: simplfied and traditional. The former is used in the mainland, wheras the latter is used in Taiwan and Korea.
+  * Check [this](https://namu.wiki/w/%ED%95%9C%EC%A4%91%EC%9D%BC%20%ED%95%9C%EC%9E%90%20%EB%B9%84%EA%B5%90%ED%91%9C) to see the list of characters that are differntly used in Chinese, Japanese, and Korean.
+  * Typically people type pinyin to input Chinese characters in the digital setting. The pinyin to Chinese conversion is very important. (Check [this]( https://github.com/Kyubyong/neural_chinese_transliterator))
+  * ****`TOOL`**** [pypinyin: a python project for getting pinyin for Chinese words or sentence](https://github.com/smallqiao/pypinyin)
+  * ****`TOOL`**** [Jieba: Chinese text segmentation module](https://github.com/fxsjy/jieba)
+  * ****`TOOL`**** [hanziconv: tool converts between simplified and traditional Chinese Characters](https://pypi.org/project/hanziconv/)
 
 ### Persian
+  * ****`CHAR SET`**** [ \p{Arabic}.؟!،0-9]
+  * Check [Arabic](#Arabic)
+  * When a Zero-Width Non-Joiner (ZWNJ) is used between  two  characters, it forces  a  final  form  on  the  preceding  character. (See [this](http://www.zoorna.org/shiraz/ZWNJ.pdf))
 
 ### Portuguese
-### Punjabi
+  * ****`CHAR SET`**** [ \p{Latin}.?!'\-0-9]
+  * The hyphen (-) is used to make compound words
+    * E.g., levaria + vos + os = levar-vos-ia "I would take to you"
 
 ### Russian
-* ****`CHAR SET`**** [ \p{Cyrillic}.!?'\-0-9]
-
+  * ****`CHAR SET`**** [ \p{Cyrillic}.!?'\-0-9]
 
 ### Spanish
+  * ****`CHAR SET`**** [ \p{Latin}.!?¿'\-0-9]
+  * ¿ is used at the beginning of a interrogative sentence, pairing with ?.
 
 ### Thai
-
-### Turkish
+  * ****`CHAR SET`**** [ \p{Thai}.!?0-9]
+  * No space between words
+  * Space is used as a sentence separator or comma.
+  * ****`TOOL`**** [pythai: A collection of tools for working with the Thai language in Python](https://github.com/hermanschaaf/pythai)
 
 ### Vietnamese
-* ****`CHAR SET`**** [ \p{Latin}.!?'\-0-9]
-* 6 different tones are marked by diacritics.
-  * a (mid level)
-  * à (low falling)
-  * ả (mid falling)
-  * ã (glottalized rising)
-  * á (high rising)
-  * ạ (glottalized falling)
-* Spaces are used to separate syllables, not words.
-  * E.g., thuế thu nhập cá nhâ -> thuế "tax" + thu_nhập "income" + cá_nhân "individual"
-* ****`INFO`**** [word segmentation tools](https://github.com/magizbox/underthesea/wiki/Vietnamese-NLP-Tools#word-segmentation)
+  * ****`CHAR SET`**** [ \p{Latin}.!?'\-0-9]
+  * 6 different tones are marked by diacritics.
+    * a (mid level)
+    * à (low falling)
+    * ả (mid falling)
+    * ã (glottalized rising)
+    * á (high rising)
+    * ạ (glottalized falling)
+  * Spaces are used to separate syllables, not words.
+    * E.g., thuế thu nhập cá nhâ -> thuế "tax" + thu_nhập "income" + cá_nhân "individual"
+  * ****`INFO`**** [word segmentation tools](https://github.com/magizbox/underthesea/wiki/Vietnamese-NLP-Tools#word-segmentation)
 
-### Zulu
