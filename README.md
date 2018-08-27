@@ -40,7 +40,7 @@ If you're interested in a single language, say, English, it's fine. But if you t
     * Idioms e.g., ‘kick the bucket’
     * Compounds e.g., ‘San Francisco’
     * Phrasal verbs e.g. ‘get … across’
-    * ****`PROJECT`***** [Multiword Expression Project](http://mwe.stanford.edu/))
+    * ****`PROJECT`**** [Multiword Expression Project](http://mwe.stanford.edu/)
   * Sentence
     * Usually identified by a sentenc ending symbol (.!?)
     * Period (.) is sometimes ambiguous.
