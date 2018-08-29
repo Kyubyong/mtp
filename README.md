@@ -149,8 +149,10 @@ def strip_diacritics(str):
   * [ARPABET Symbols](https://en.wikipedia.org/wiki/ARPABET)
 
 ## Languages
+(Main sources: Relevant Wiki pages)
+
 ### Arabic
-  * ****`CHAR SET`**** [\p{Arabic}.؟!،0-9]
+  * ****`CHAR SET`**** [ \p{Arabic}.؟!،0-9]
   * Written from right to left
   * Cursive
   * No distinct upper and lower case letter forms
@@ -203,7 +205,7 @@ def strip_diacritics(str):
   * Semicolon (;) is used as a question mark.
 
 ### Hindi
-  * ****`CHAR SET`**** [\p{Devanagari}0-9\|?!]
+  * ****`CHAR SET`**** [ \p{Devanagari}0-9\|?!]
   * Vertical line (|) is used at the end of a sentence.
   * Indian numbering system is special.
     * E.g., 1,00,00,00,000
