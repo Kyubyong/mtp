@@ -1,5 +1,7 @@
 # Multi-lingual Text Processing
 
+This is for my tech talk at Naver on September 6, 2018. The video (link) should be available soon.
+
 ## Why ~~Multi-lingual Text~~ Processing?
   Yes! Modeling is fancy. Data processing is tedious. You don't want to do that. I know. But from my experience it's often data processing that determines the performance of your experiement rather than modeling. If you can't avoid, it's better do it right.
 
@@ -273,8 +275,9 @@ def strip_diacritics(str):
   * ****`CHAR SET`**** [ \p{Cyrillic}.!?'\-0-9]
 
 ### Spanish
-  * ****`CHAR SET`**** [ \p{Latin}.!?¿'\-0-9]
+  * ****`CHAR SET`**** [ \p{Latin}.!¡?¿'\-0-9]
   * ¿ is used at the beginning of a interrogative sentence, pairing with ?.
+  * ¡ is used at the beginning of a exclamatory sentence, paring with !.
 
 ### Thai
   * ****`CHAR SET`**** [ \p{Thai}.!?0-9]
