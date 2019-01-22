@@ -1,6 +1,6 @@
 # Multi-lingual Text Processing
 
-This is for my tech talk at Naver on September 6, 2018. The video (link) should be available soon.
+This is for my [tech talk](https://m.youtube.com/watch?feature=youtu.be&v=nYV9heR_nBY) at Naver on September 6, 2018.
 
 ## Why ~~Multi-lingual Text~~ Processing?
   Yes! Modeling is fancy. Data processing is tedious. You don't want to do that. I know. But from my experience it's often data processing that determines the performance of your experiement rather than modeling. If you can't avoid, it's better do it right.
